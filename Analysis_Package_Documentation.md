@@ -26,15 +26,15 @@ As an example, look at "Protection Status of Ecological Systems by Ecoregion", t
 
 > One important use of the data in this Biogeographic Analysis Package is to evaluate what proportion of the ecological systems in an ecoregion are managed for long-term conservation. These data can be expressed as “threshold” levels of ecological system protection. These thresholds provide a convenient reporting framework ... (<https://www.sciencebase.gov/catalog/item/5645fa07e4b0e2669b30f267>, retrieved 2018-02-20)
 
-##### Inputs
-Required inputs 
-*Master Sampleds 
-*Target Frame
+#### Inputs
+##### Required inputs 
+* Master Sampleds 
+* Target Frame
 
 ##### Optional 
-*Legacy Sites 
-*Panels
-*Strata 
+* Legacy Sites 
+* Panels
+* Strata 
 
 
 Document all inputs. Names, links, security constraints, spatial extent and resolution, temporal extent and resolution, example code to access are all important to capture. Documenting these early on makes it easier for others to jump in and help debug, capture the provenance and, later in the process, are critical to the developers operationalizing the scientific code.
