@@ -1,7 +1,24 @@
 ### Analysis Package Elements
 This document lists and describes the elements required for an analysis package. Here, an element is defined as categorical information needed to understand and use the package in a traceable and repeatable manner. Each element needs to be explicitly present in the package's code and supporting documents. All the elements listed below are required for analysis package review, acceptance and deployment.
 
+#### Background
+
+MonitoringResources.org provides an online, publicly accessible suite of information and tools, including maps and metadata describing existing monitoring projects; a library of standard monitoring methods, protocols, and data dictionaries; and guidelines and tools to help managers develop new monitoring programs and share existing ones. Resource managers, funding sources, and policy makers can quickly look up existing and proposed monitoring projects so that they can better understand how well priorities are being met and assess where monitoring efforts might have gaps or redundancies. Users can see maps of sampling sites, compare protocols of different monitoring projects, and identify locations and sampling strategies for additional monitoring or to optimize existing monitoring. The tools guide and support study design and methods documentation from the earliest planning stages through implementation. Users can easily add information about their projects and programs and can share the information with partners. 
+
+Sample Designer Tool helps users: 
+•	Create and document multiple types of sample designs;
+•	Use a master sample to select and document spatially balanced, random sample sites and define the temporal plan for sampling; the selection process uses the Generalized Random Tessellation Stratified (GRTS) algorithm commonly used by agencies, monitoring organizations, and scientists;
+•	Track site evaluation status before and during sampling; and
+•	Share sampling dates, times, and implementation details with others.
+
+The MonitoringResources.org Sample Design tool has two workflows. One workflow to accomidate the documentation of a user's sample plan, the locaitons and the timing of sampling. This workflow can accomidate many differet types of designs, seen as it is documentation tool. This second workflow accomidates a user selecting sites from a Master Sample library appalying by appalying GRTS alogrithiam. This documentation focuse on the GRTS workflow and algorithiam 
+
 #### Purpose
+This pacakges is intended to share information and code assoicated with the MonitoringResources.org GRTS workflow.  This allows user to see the R code assoicated with the GUI interface built into MonitoringResource.org. The code is well documetned and can be used in R to duplicate output. 
+
+
+
+
 Describe the purpose of the analysis package. What does it do? What does the user come away with? Having a clear and concise description is critical to develop, assess, validate and review the analyses and visualizations with colleagues and developers. Plus, it will be critical for the formal review process of your work
 
 As an example, look at "Protection Status of Ecological Systems by Ecoregion", the first BAP listed at <https://maps.usgs.gov/biogeography>, clicking on the BAP's information "i" pulls this and other pertinent text from ScienceBase:
@@ -10,9 +27,23 @@ As an example, look at "Protection Status of Ecological Systems by Ecoregion", t
 > One important use of the data in this Biogeographic Analysis Package is to evaluate what proportion of the ecological systems in an ecoregion are managed for long-term conservation. These data can be expressed as “threshold” levels of ecological system protection. These thresholds provide a convenient reporting framework ... (<https://www.sciencebase.gov/catalog/item/5645fa07e4b0e2669b30f267>, retrieved 2018-02-20)
 
 #### Inputs
+Required inputs 
+>Master Sampleds 
+>Target Frame
+
+Optional 
+>Legacy Sites 
+>Panels
+>Strata 
+>
+
 Document all inputs. Names, links, security constraints, spatial extent and resolution, temporal extent and resolution, example code to access are all important to capture. Documenting these early on makes it easier for others to jump in and help debug, capture the provenance and, later in the process, are critical to the developers operationalizing the scientific code.
 
 #### Outputs
+
+Documentation in MonitoringResources.org 
+Sapatially Balanced Sites Selected from the Master Sample 
+
 Document all outputs. Again names, links, security constraints, spatial extent and resolution, temporal extent and resolution, example output code all help speed development and ensure repeatability. We'll also need this for the review(s).
 
 #### Constraints
@@ -22,6 +53,7 @@ List and adequately explain any analytical constraints. For example, is the anal
 List all dependencies. Are there specific software libraries, packages, or other BAPs that are required to do this analysis? If so, what are they called, where can they be found and what version did you use? All this will also be wrapped up in the provenance trace.
 
 #### Code
+The code is stored in GitHub, in this repository. 
 Where is your code? It needs to be under source control in a publically accessible repository. Most of us use GitHub for our development but that choice is yours. Note the official USGS repos are required for disseminating final, authorized for release code. What is your code written in? R? Python? We use both for the science code and a mix for operational. Note, for sanity we always try to code against APIs and standards (e.g. W3C and OGC). It is a simple best practice. Plus, we tend to capture much of this in Jupyter notebooks under source control that we can share and collaborate on.
 
 #### Tests
