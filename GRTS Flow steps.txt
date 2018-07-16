@@ -1,0 +1,145 @@
+GRTS Flow:
+	Select Master Sample
+		Chooses exactly one master sample to pull a subset of sites from
+	
+	Define Frame
+		Filters the sites from the master sample to a manageable number (> 80000)
+		Stores the resulting sites in the Frame of this design
+
+	Select Other Sites
+		Selects one or more user samples that work with the master sample (based on weight/attributes)
+		Stores the resulting sites in the Frame
+		If you're doing Panels, you need to have an attribute in your user sample that is marked as a panel variable, and has values that match the panels in your create panels step below
+
+	Create Panels
+		Creates the schedule you'll visit the sites
+		If you're not doing Stratify then you allocate the number of sites per panel here
+		If you're not doing Panels then a panel titled 'Default' is created for you, since GRTS requires panels.
+
+	Compute Attributes
+		Creates attributes for stratification with javascript functions
+
+	Stratify
+		Creates Strata based on attributes (computed or not) and assigns the sites to that particular strata
+
+	Generate Sites
+		Queues and Runs the R GRTS code
+
+
+		R Code: (For each sample design)
+			Mark design as started in grts flow
+			Get list of MS sites
+			Validate list is OK (shape, num sites)
+			Determine target panel size
+			Get list of Legacy sites
+
+			Call strat_panel.fcn from grts R code
+				Validate target panel size
+				Set up strata (None, or what was done previously)
+				Validate no strata are empty
+				Validate ms sites have correct attributes (site id, x coord, y coord) and resolve duplicates
+				If not using legacy sites call: ms.panel.fcn
+					Notes:
+					# trgt.psz is the vector of target panel sizes (or target sample size if only
+					#   one panel)
+					# prob.nam is the column in ms.df that contains relative inclusion
+					#   probabilities for the frame.  Default assumes equi-probable sample.
+					# returned value is a list with two components
+					# message  is any error or informative message
+					# result is data frame with the first three rows as follows:
+					#  result[,1] =  panel number
+					#  result[,2] = over sample indicator (0 = no, 1 = yes site is over sample site
+					#  result[,3] = adjusted weight based on panel size
+					# The remaining columns of reslt are copied from ms.df
+
+
+
+				If using legacy sites:
+					Validate legacy sites have correct attributes
+					For each strata:
+						Pull out legacy sites + ms sites that belong to strata
+						Pass into ms.legacy.panel.fcn
+							Notes:
+							############################################################################
+							# Modified September 2011
+							#
+							# ms.df contains the sample downloaded from the Master Sample website.
+							#   Legacy sample points must be supplied in the data frame legacy.df.
+							#   
+							#
+							# legacy.df is the data frame of legacy points.  User must define strata 
+							#   (if any) and panel assignments (if panels are required). These must be in 
+							#   the same projection and units as used by the Master Sample.  Columns must 
+							#   include site.id","x.coord","y.coord"  consistent with ms.df.  If strata or 
+							#   panels are required, stratum column should have the same name as the ms.df 
+							#   stratum column, panel column should be names "Panel".  
+							#   The legacy points are assumed to be located on the stream network sampled 
+							#     the Master Sample.  They should have been selected using the same GIS
+							#     coverage as the MS.  
+							#
+							#
+							# trgt.psz is the vector of target panel sizes (or target sample size if only
+							#   one panel)
+							#
+							# prob.name is name of column in ms.df) that contains relative inclusion
+							#   probabilities for the frame.  Default assumes equi-probable sample.
+							#   If prob.name is set, prob.name must also be in legacy.df.  For
+							#   example, to select a sample with inclusion probability proportional to
+							#   stream order, both prob.name  should be set name of column with stream order
+							#   of the respective points
+							#
+							#
+							# Points with coordinates in legacy.df are included wp1.  Nearby points (in
+							#   hierarchical order ) have prob adjusted downward to compensate.
+							#
+							# Sample will be returned in reverse hierarchical order unless "leg.first"
+							#   is set to TRUE.  If leg.first is TRUE, legacy points will appear before new
+							#   points.
+
+							Validate weight col
+							count MS sites
+							count legacy sites
+							calculate total sites
+							populate panel field on legacy dataframe with 1's
+							get legacy sites per panel
+							split MS points into num panel segments w/size proportional to target panel size
+							get total points per panel
+							Validate counts of sites are valid (total sites per panel < target panel size)
+							Validate that target panel size < number of legacy sites for this panel
+							Calculate Oversample by rounding target panel size up the next power of 2 (size: 36 -> 64)
+								Unless the result is less than 1.5x the target panel size, then use the next power of 2?
+							Calculate the Reverse Hierarchical Order of the MS sites for this strata
+							# assign panels & over sample
+							For each Panel:
+								Get counts of MS sites for panel
+								Get counts of legacy sites for panel
+								get total pop for panel
+								Get probability from column or compute it
+
+								# get HR order for composite of legacy & MS points
+								# Scale to unit square & get random offset
+								# partition so no more than 1 sample point per cell & construct hierarchical
+   								# address for all points 
+   								# Non-randomized addresses of points are in matrix nhadr
+								# pick points in panel 
+								# pick sample from points in panel
+								# construct  reverse hierarchical order for over-sample points
+								# Place weighted points on line in reverse hierarchical order
+
+
+								construct output data frame for panel/strat from rho above
+								accumulate panel data in result
+							return data for all panels in this strata
+						accumulate data in strata list to be returned
+				return full list sites
+			Parse output and messages from strat_panel.fcn
+			Validate output is valid (has sites)
+			Save the list of sites back to MR database
+			Mark sample design as grts flow has ended.
+
+
+
+
+
+
+
