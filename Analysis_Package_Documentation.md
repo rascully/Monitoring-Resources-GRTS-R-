@@ -1,19 +1,19 @@
 ### Analysis Package Elements
 This document lists and describes the elements required for an analysis package. Here, an element is defined as categorical information needed to understand and use the package in a traceable and repeatable manner. Each element needs to be explicitly present in the package's code and supporting documents. All the elements listed below are required for analysis package review, acceptance and deployment.
 
-#### Background
+### Background
 
 MonitoringResources.org provides an online, publicly accessible suite of information and tools, including maps and metadata describing existing monitoring projects; a library of standard monitoring methods, protocols, and data dictionaries; and guidelines and tools to help managers develop new monitoring programs and share existing ones. Resource managers, funding sources, and policy makers can quickly look up existing and proposed monitoring projects so that they can better understand how well priorities are being met and assess where monitoring efforts might have gaps or redundancies. Users can see maps of sampling sites, compare protocols of different monitoring projects, and identify locations and sampling strategies for additional monitoring or to optimize existing monitoring. The tools guide and support study design and methods documentation from the earliest planning stages through implementation. Users can easily add information about their projects and programs and can share the information with partners. 
 
 Sample Designer Tool helps users: 
-•	Create and document multiple types of sample designs;
-•	Use a master sample to select and document spatially balanced, random sample sites and define the temporal plan for sampling; the selection process uses the Generalized Random Tessellation Stratified (GRTS) algorithm commonly used by agencies, monitoring organizations, and scientists;
-•	Track site evaluation status before and during sampling; and
-•	Share sampling dates, times, and implementation details with others.
+*Create and document multiple types of sample designs;
+*Use a master sample to select and document spatially balanced, random sample sites and define the temporal plan for sampling; the selection process uses the Generalized Random Tessellation Stratified (GRTS) algorithm commonly used by agencies, monitoring organizations, and scientists;
+*Track site evaluation status before and during sampling; and
+*Share sampling dates, times, and implementation details with others.
 
 The MonitoringResources.org Sample Design tool has two workflows. One workflow to accomidate the documentation of a user's sample plan, the locaitons and the timing of sampling. This workflow can accomidate many differet types of designs, seen as it is documentation tool. This second workflow accomidates a user selecting sites from a Master Sample library appalying by appalying GRTS alogrithiam. This documentation focuse on the GRTS workflow and algorithiam 
 
-#### Purpose
+### Purpose
 This pacakges is intended to share information and code assoicated with the MonitoringResources.org GRTS workflow.  This allows user to see the R code assoicated with the GUI interface built into MonitoringResource.org. The code is well documetned and can be used in R to duplicate output. 
 
 
@@ -26,16 +26,16 @@ As an example, look at "Protection Status of Ecological Systems by Ecoregion", t
 
 > One important use of the data in this Biogeographic Analysis Package is to evaluate what proportion of the ecological systems in an ecoregion are managed for long-term conservation. These data can be expressed as “threshold” levels of ecological system protection. These thresholds provide a convenient reporting framework ... (<https://www.sciencebase.gov/catalog/item/5645fa07e4b0e2669b30f267>, retrieved 2018-02-20)
 
-#### Inputs
+##### Inputs
 Required inputs 
->Master Sampleds 
->Target Frame
+*Master Sampleds 
+*Target Frame
 
-Optional 
->Legacy Sites 
->Panels
->Strata 
->
+##### Optional 
+*Legacy Sites 
+*Panels
+*Strata 
+
 
 Document all inputs. Names, links, security constraints, spatial extent and resolution, temporal extent and resolution, example code to access are all important to capture. Documenting these early on makes it easier for others to jump in and help debug, capture the provenance and, later in the process, are critical to the developers operationalizing the scientific code.
 
